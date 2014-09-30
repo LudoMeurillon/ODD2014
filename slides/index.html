@@ -46,15 +46,15 @@
 				</section>
 
 				<section>
-					<h1>Quelques explications</h1>
-				</section>
-
-				<section>
 					<section>
-						<h1>Linux Container</h1>
+						<h1>Quelques explications</h1>
 					</section>
 					<section>
-
+						<h1>VM &amp; Container</h1>
+						<img src="img/vmvscontainer.png"/>
+					</section>
+					<section>
+						<h1>DotCloud &amp; Docker</h1>
 					</section>
 				</section>
 
@@ -74,35 +74,171 @@
 					<section>
 						Décrit la séquence de démarrage
 					</section>
-				</section>
-				<section>
 					<section>
-						<h1>Dockerfile (suite)</h1>
-						Les instructions usuelles
+						Incrémental
 					</section>
 					<section>
-						<div>FROM &lt;image&gt;</div>
+						<h1>Les instructions</h1>
+					</section>
+					<section>
+						<h1>FROM &lt;image&gt;</h1>
 						<div>Définit l'image de base sur laquelle démarrer le build</div>
 					</section>
 					<section>
-						<div>RUN</div>
+						<h1>RUN</h1>
 						<div>Lance une commande et commit le résultat dans une nouvelle image</div>
 						<div>exemple : un build maven</div>
 					</section>
 					<section>
-						<div>ADD &lt;src&gt; &lt;dest&gt;</div>
+						<h1>COPY &lt;src&gt; &lt;dest&gt;</h1>
 						<div>Copie le fichier &lt;src&gt; dans &lt;dest&gt; au sein du container
 						<div>exemple : un war</div>
 					</section>
 					<section>
-<pre>
-FROM      tomcat
+						<h1>Exemple</h1>
+<pre class="dockerfile">
+FROM tutum/tomcat:7.0
 MAINTAINER Ludovic Meurillon &lt;ludovic.meurillon@orange.com&gt;
 
-ADD ./target/monwar.war /tmp
-
-RUN cp /tmp/monwar.war /tomcat/webapps/ROOT.war
+COPY ./target/monwar.war /tomcat/webapps/monwar.war
 </pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h1>docker run</h1>
+					</section>
+					<section>
+						<h1>Exemple</h1>
+						<pre>sudo docker run -it -v /home/data:/data --name appli ludovic/appli</pre>
+					</section>
+					<section>
+						<h1>Volumes</h1>
+						<pre>-v /home/data:/data</pre>
+						<div>"Monte" le repertoire /home/data de la machine hôte dans /data du container</div>
+					</section>
+					<section>
+						<h1>Nom</h1>
+						<pre>--name appli</pre>
+						<div>Permet de nommer le container "appli" et faire ensuite</div>
+						<pre>docker [start|stop|logs] appli</pre>
+					</section>
+					<section>
+						<h1>Image</h1>
+						<pre>ludovic/appli:latest</pre>
+						<div>Base le container sur l'image ludovic/appli:latest</div>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h1>docker run --link</h1>
+					</section>
+					<section>
+						<h1>Test</h1>
+						<pre>docker run --name mysql -e MYSQL_ROOT_PASSWORD=kermit mysql:5.6</pre>
+					</section>
+					<section>
+						<h1>Test</h1>
+						<pre>docker run --name appli --link mysql:db ubuntu:14.04 "env"</pre>
+						<pre class="dockerfile">
+DB_PORT=tcp://172.17.0.23:3306
+DB_PORT_3306_TCP=tcp://172.17.0.23:3306
+DB_PORT_3306_TCP_ADDR=172.17.0.23
+DB_PORT_3306_TCP_PORT=3306
+DB_PORT_3306_TCP_PROTO=tcp
+DB_NAME=/appli/db
+DB_ENV_MYSQL_ROOT_PASSWORD=kermit
+DB_ENV_MYSQL_MAJOR=5.6
+DB_ENV_MYSQL_VERSION=5.6.20
+					</pre>
+					</section>
+					<section>
+						<h1>Volumes</h1>
+						<pre>-v /home/data:/data</pre>
+						<div>"Monte" le repertoire /home/data de la machine hôte dans /data du container</div>
+					</section>
+					<section>
+						<h1>Nom</h1>
+						<pre>--name appli</pre>
+						<div>Permet de nommer le container "appli" et faire ensuite</div>
+						<pre>docker [start|stop|logs] appli</pre>
+					</section>
+					<section>
+						<h1>Image</h1>
+						<pre>ludovic/appli:latest</pre>
+						<div>Base le container sur l'image ludovic/appli:latest</div>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h1>Sous le capot</h1>
+					</section>
+					<section>
+						<h1>Service</h1>
+						<div>un démon linux avec API HTTP</div>
+					</section>
+					<section>
+						<h1>Fichiers</h1>
+						<div>diff</div>
+						<div>containers</div>
+						<div>images</div>
+					</section>
+					<section>
+						<h1>Réseau</h1>
+						<div>iptables (NAT, Firewall)</div>
+					</section>
+					<section>
+						<h1>Firewall</h1>
+						<pre>docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=kermit mysql:5.6</pre>
+						<pre>docker run -d -t --name appli --link mysql:db ubuntu:14.04</pre>
+					</section>
+					<section>
+						<h1>Firewall</h1>
+						<pre>sudo iptables -L</pre>
+					<pre class="dockerfile">
+...
+Chain FORWARD (policy ACCEPT)
+target prot opt source      destination
+ACCEPT tcp  --  172.17.0.21 172.17.0.22 tcp spt:mysql
+ACCEPT tcp  --  172.17.0.22 172.17.0.21 tcp dpt:mysql
+...
+					</pre>
+					</section>
+					<section>
+						<h1>NAT</h1>
+						<pre>docker run -d --name mysql -p 3308:3306 -e MYSQL_ROOT_PASSWORD=kermit mysql:5.6</pre>
+					</section>
+					<section>
+						<h1>NAT</h1>
+						<pre>sudo iptables -t nat -L</pre>
+					<pre class="dockerfile">
+...
+Chain DOCKER (1 references)
+target prot opt source    destination
+DNAT   tcp  --  anywhere  anywhere     tcp dpt:3308 to:172.17.0.23:3306
+...
+					</pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h1>Registry</h1>
+					</section>
+					<section>
+						<div>Deployer les images dans des registry internes</div>
+					</section>
+					<section>
+						<h1>Lancer un registry</h1>
+						<pre>docker run -p 5000:5000 --name registry -d registry</pre>
+					</section>
+					<section>
+						<h1>Livrer</h1>
+						<pre>docker tag &lt;image&gt; localhost:5000/&lt;image&gt;</pre>
+						<pre>docker push localhost:5000/&lt;image&gt;</pre>
+					</section>
+					<section>
+						<h1>Utiliser</h1>
+						<pre>docker pull localhost:5000/&lt;image&gt;</pre>
 					</section>
 				</section>
 

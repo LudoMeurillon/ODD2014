@@ -180,3 +180,19 @@ body {
   list-style-type: none;
 
 }
+
+.reveal pre{
+  width:100%;
+  margin-left:0px;
+  margin-right:0px;
+  margin-top:30px;
+  margin-bottom:30px;
+  padding:15px;
+  font-size: 0.65em;
+  text-align: center;
+}
+
+.reveal pre.dockerfile{
+  text-align: left;
+}
+
