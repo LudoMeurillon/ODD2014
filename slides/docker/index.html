@@ -98,7 +98,7 @@
 						<h1>Exemple</h1>
 <pre class="dockerfile">
 FROM tutum/tomcat:7.0
-MAINTAINER Ludovic Meurillon &lt;ludovic.meurillon@orange.com&gt;
+MAINTAINER Developer Day &lt;devday@orange.com&gt;
 
 COPY ./target/monwar.war /tomcat/webapps/monwar.war
 </pre>
@@ -106,35 +106,35 @@ COPY ./target/monwar.war /tomcat/webapps/monwar.war
 				</section>
 				<section>
 					<section>
-						<h1>docker run</h1>
+						<h1>Build</h1>
+						<pre>sudo docker build -t devday/appli .</pre>
 					</section>
 					<section>
-						<h1>Exemple</h1>
-						<pre>sudo docker run -it -v /home/data:/data --name appli ludovic/appli</pre>
+						<h1>Run</h1>
+						<pre>sudo docker run -it -v /home/data:/data --name appli devday/appli</pre>
 					</section>
 					<section>
-						<h1>Volumes</h1>
+						<h1>Run - Volumes</h1>
 						<pre>-v /home/data:/data</pre>
 						<div>"Monte" le repertoire /home/data de la machine hôte dans /data du container</div>
 					</section>
 					<section>
-						<h1>Nom</h1>
+						<h1>Run - Nom</h1>
 						<pre>--name appli</pre>
 						<div>Permet de nommer le container "appli" et faire ensuite</div>
 						<pre>docker [start|stop|logs] appli</pre>
 					</section>
 					<section>
-						<h1>Image</h1>
-						<pre>ludovic/appli:latest</pre>
-						<div>Base le container sur l'image ludovic/appli:latest</div>
-					</section>
-				</section>
-				<section>
-					<section>
-						<h1>docker run --link</h1>
+						<h1>Run - Image</h1>
+						<pre>devday/appli:latest</pre>
+						<div>Base le container sur l'image devday/appli dans sa dernière version disponible</div>
 					</section>
 					<section>
-						<h1>Test</h1>
+						<h1>Run - Link</h1>
+						<div>Faire un lien entre 2 container présents sur la même machine</div>
+					</section>
+					<section>
+						<h1>Run - Link - Exemple</h1>
 						<pre>docker run --name mysql -e MYSQL_ROOT_PASSWORD=kermit mysql:5.6</pre>
 					</section>
 					<section>
@@ -151,22 +151,6 @@ DB_ENV_MYSQL_ROOT_PASSWORD=kermit
 DB_ENV_MYSQL_MAJOR=5.6
 DB_ENV_MYSQL_VERSION=5.6.20
 					</pre>
-					</section>
-					<section>
-						<h1>Volumes</h1>
-						<pre>-v /home/data:/data</pre>
-						<div>"Monte" le repertoire /home/data de la machine hôte dans /data du container</div>
-					</section>
-					<section>
-						<h1>Nom</h1>
-						<pre>--name appli</pre>
-						<div>Permet de nommer le container "appli" et faire ensuite</div>
-						<pre>docker [start|stop|logs] appli</pre>
-					</section>
-					<section>
-						<h1>Image</h1>
-						<pre>ludovic/appli:latest</pre>
-						<div>Base le container sur l'image ludovic/appli:latest</div>
 					</section>
 				</section>
 				<section>
