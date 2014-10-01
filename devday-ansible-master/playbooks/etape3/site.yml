@@ -1,0 +1,12 @@
+---
+  - name: "Etape 3 - Configure log servers"
+    hosts: logservers
+    roles:
+      - logserver
+
+  - name: "Etape 3 - Configure websites to deliver site and forard apache logs"
+    hosts: webservers
+    roles:
+      - logforwarder
+      - website
+

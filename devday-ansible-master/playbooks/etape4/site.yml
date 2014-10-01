@@ -1,0 +1,6 @@
+---
+  - name: "Etape 4 - Configure websites to deliver localized content"
+    hosts: webservers
+    roles:
+      - website
+

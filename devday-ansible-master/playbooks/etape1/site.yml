@@ -1,0 +1,10 @@
+- name: "Test configuration"
+  hosts: all
+  tasks:
+      - name: "Do 'Hello world' on each machine"
+        command: hostname
+        register: result
+        changed_when: False
+
+      - name: "Print result on master side"
+        debug: msg="{{ inventory_hostname }} hostname={{ result.stdout }}"

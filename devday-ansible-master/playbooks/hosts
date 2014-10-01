@@ -1,0 +1,14 @@
+[europe]
+machine1
+machine2
+
+[us]
+machine3
+machine4
+
+[webservers]
+machine1
+machine3
+
+[logservers]
+machine5

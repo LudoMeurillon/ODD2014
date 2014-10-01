@@ -1,0 +1,6 @@
+---
+  - name: "Installation du site"
+    copy: src=site/ dest=/var/www/html
+
+  - name: "start apache2"
+    service: name=apache2 state=started
