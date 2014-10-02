@@ -96,33 +96,37 @@
 					</section>
 					<section>
 						<h1>Exemple</h1>
-<pre class="dockerfile">
+<pre class="dockerfile"><code>
 FROM tutum/tomcat:7.0
 MAINTAINER Developer Day &lt;devday@orange.com&gt;
 
 COPY ./target/monwar.war /tomcat/webapps/monwar.war
-</pre>
+
+</code></pre>
 					</section>
 				</section>
 				<section>
 					<section>
 						<h1>Build</h1>
-						<pre>sudo docker build -t devday/appli .</pre>
+						<pre class="command"><code class="hljs bash">sudo docker build -t devday/appli .</code></pre>
 					</section>
 					<section>
 						<h1>Run</h1>
-						<pre>sudo docker run -it -v /home/data:/data --name appli devday/appli</pre>
+						<pre class="command"><code class="hljs bash">sudo docker run -it -v /home/data:/data --name appli devday/appli</code></pre>
 					</section>
 					<section>
 						<h1>Run - Volumes</h1>
 						<pre>-v /home/data:/data</pre>
 						<div>"Monte" le repertoire /home/data de la machine hôte dans /data du container</div>
 					</section>
-					<section>
+					<section class="fragment-slides">
 						<h1>Run - Nom</h1>
+						<div>On peut nommer un container "appli"</div>
 						<pre>--name appli</pre>
-						<div>Permet de nommer le container "appli" et faire ensuite</div>
-						<pre>docker [start|stop|logs] appli</pre>
+						<div class="fragment">
+							<div>Pour ensuite pouvoir faire</div>
+							<pre class="command"><code class="hljs bash">docker &lt;command&gt; appli</code></pre>
+						</div>
 					</section>
 					<section>
 						<h1>Run - Image</h1>
@@ -135,13 +139,13 @@ COPY ./target/monwar.war /tomcat/webapps/monwar.war
 					</section>
 					<section>
 						<h1>Run - Link - Exemple</h1>
-						<pre>docker run --name mysql -e MYSQL_ROOT_PASSWORD=kermit mysql:5.6</pre>
+						<pre class="command"><code class="hljs bash">docker run --name mysql -e MYSQL_ROOT_PASSWORD=kermit mysql:5.6</code></pre>
 					</section>
-					<section>
+					<section class="fragment-slides">
 						<h1>Test</h1>
-						<pre>docker run --name appli --link mysql:db ubuntu:14.04 "env"</pre>
-						<pre class="dockerfile">
-DB_PORT=tcp://172.17.0.23:3306
+						<pre class="command"><code class="hjls bash">docker run --name appli --link mysql:db ubuntu:14.04 "env"</code></pre>
+<pre class="fragment dockerfile">
+<code>DB_PORT=tcp://172.17.0.23:3306
 DB_PORT_3306_TCP=tcp://172.17.0.23:3306
 DB_PORT_3306_TCP_ADDR=172.17.0.23
 DB_PORT_3306_TCP_PORT=3306
@@ -150,7 +154,9 @@ DB_NAME=/appli/db
 DB_ENV_MYSQL_ROOT_PASSWORD=kermit
 DB_ENV_MYSQL_MAJOR=5.6
 DB_ENV_MYSQL_VERSION=5.6.20
-					</pre>
+</code>
+</pre>
+
 					</section>
 				</section>
 				<section>
@@ -173,35 +179,31 @@ DB_ENV_MYSQL_VERSION=5.6.20
 					</section>
 					<section>
 						<h1>Firewall</h1>
-						<pre>docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=kermit mysql:5.6</pre>
-						<pre>docker run -d -t --name appli --link mysql:db ubuntu:14.04</pre>
+						<pre class="command"><code class="hljs bash">docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=kermit mysql:5.6</code></pre>
+						<pre class="command"><code class="hljs bash">docker run -d -t --name appli --link mysql:db ubuntu:14.04</code></pre>
 					</section>
 					<section>
 						<h1>Firewall</h1>
-						<pre>sudo iptables -L</pre>
-					<pre class="dockerfile">
-...
+						<pre class="command"><code class="hljs bash">sudo iptables -L</code></pre>
+					<pre class="fragment dockerfile"><code class="hljs bash">...
 Chain FORWARD (policy ACCEPT)
 target prot opt source      destination
 ACCEPT tcp  --  172.17.0.21 172.17.0.22 tcp spt:mysql
 ACCEPT tcp  --  172.17.0.22 172.17.0.21 tcp dpt:mysql
-...
-					</pre>
+...</code></pre>
 					</section>
 					<section>
 						<h1>NAT</h1>
-						<pre>docker run -d --name mysql -p 3308:3306 -e MYSQL_ROOT_PASSWORD=kermit mysql:5.6</pre>
+						<pre class="command"><code class="hljs bash">docker run -d --name mysql -p 3308:3306 -e MYSQL_ROOT_PASSWORD=kermit mysql:5.6</code></pre>
 					</section>
 					<section>
 						<h1>NAT</h1>
-						<pre>sudo iptables -t nat -L</pre>
-					<pre class="dockerfile">
-...
+						<pre class="command"><code class="hljs bash">sudo iptables -t nat -L</code></pre>
+					<pre class="fragment dockerfile"><code class="hljs bash">...
 Chain DOCKER (1 references)
 target prot opt source    destination
 DNAT   tcp  --  anywhere  anywhere     tcp dpt:3308 to:172.17.0.23:3306
-...
-					</pre>
+...</code></pre>
 					</section>
 				</section>
 				<section>
@@ -213,16 +215,16 @@ DNAT   tcp  --  anywhere  anywhere     tcp dpt:3308 to:172.17.0.23:3306
 					</section>
 					<section>
 						<h1>Lancer un registry</h1>
-						<pre>docker run -p 5000:5000 --name registry -d registry</pre>
+						<pre class="command"><code class="hljs bash">docker run -p 5000:5000 --name registry -d registry</code></pre>
 					</section>
 					<section>
 						<h1>Livrer</h1>
-						<pre>docker tag &lt;image&gt; localhost:5000/&lt;image&gt;</pre>
-						<pre>docker push localhost:5000/&lt;image&gt;</pre>
+						<pre class="command"><code class="hljs bash">docker tag &lt;image&gt; localhost:5000/&lt;image&gt;</code></pre>
+						<pre class="command"><code class="hljs bash">docker push localhost:5000/&lt;image&gt;</code></pre>
 					</section>
 					<section>
 						<h1>Utiliser</h1>
-						<pre>docker pull localhost:5000/&lt;image&gt;</pre>
+						<pre class="command"><code class="hljs bash">docker pull localhost:5000/&lt;image&gt;</code></pre>
 					</section>
 				</section>
 
