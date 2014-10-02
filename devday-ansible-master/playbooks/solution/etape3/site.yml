@@ -4,7 +4,7 @@
     roles:
       - logserver
 
-  - name: "Etape 3 - Configure websites to deliver site and forard apache logs"
+  - name: "Etape 3 - Configure websites to deliver site and forward apache logs"
     hosts: webservers
     roles:
       - logforwarder
