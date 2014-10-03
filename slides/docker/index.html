@@ -100,7 +100,8 @@
 FROM tutum/tomcat:7.0
 MAINTAINER Developer Day &lt;devday@orange.com&gt;
 
-COPY ./target/monwar.war /tomcat/webapps/monwar.war
+RUN rm -f /tomcat/webapps/*
+COPY gitbucket.war -o /tomcat/webapps/ROOT.war
 
 </code></pre>
 					</section>
@@ -108,30 +109,30 @@ COPY ./target/monwar.war /tomcat/webapps/monwar.war
 				<section>
 					<section>
 						<h1>Build</h1>
-						<pre class="command"><code class="hljs bash">sudo docker build -t devday/appli .</code></pre>
+						<pre class="command"><code class="hljs bash">docker build -t devday/git .</code></pre>
 					</section>
 					<section>
 						<h1>Run</h1>
-						<pre class="command"><code class="hljs bash">sudo docker run -it -v /home/data:/data --name appli devday/appli</code></pre>
+						<pre class="command"><code class="hljs bash">docker run -d -v /home:/data --name git -p 80:8080 devday/git</code></pre>
 					</section>
 					<section>
 						<h1>Run - Volumes</h1>
-						<pre>-v /home/data:/data</pre>
-						<div>"Monte" le repertoire /home/data de la machine hôte dans /data du container</div>
+						<pre>-v /home:/data</pre>
+						<div>"Monte" le repertoire /home de la machine hôte dans /data du container</div>
 					</section>
 					<section class="fragment-slides">
 						<h1>Run - Nom</h1>
-						<div>On peut nommer un container "appli"</div>
-						<pre>--name appli</pre>
+						<div>On peut nommer un container "git"</div>
+						<pre>--name git</pre>
 						<div class="fragment">
 							<div>Pour ensuite pouvoir faire</div>
-							<pre class="command"><code class="hljs bash">docker &lt;command&gt; appli</code></pre>
+							<pre class="command"><code class="hljs bash">docker &lt;command&gt; git</code></pre>
 						</div>
 					</section>
 					<section>
 						<h1>Run - Image</h1>
-						<pre>devday/appli:latest</pre>
-						<div>Base le container sur l'image devday/appli dans sa dernière version disponible</div>
+						<pre>devday/git:latest</pre>
+						<div>Base le container sur l'image devday/git dans sa dernière version disponible</div>
 					</section>
 					<section>
 						<h1>Run - Link</h1>
@@ -139,11 +140,11 @@ COPY ./target/monwar.war /tomcat/webapps/monwar.war
 					</section>
 					<section>
 						<h1>Run - Link - Exemple</h1>
-						<pre class="command"><code class="hljs bash">docker run --name mysql -e MYSQL_ROOT_PASSWORD=kermit mysql:5.6</code></pre>
+						<pre class="command"><code class="hljs bash">docker run -d --name mysql -e MYSQL_ROOT_PASSWORD=kermit mysql:5.6</code></pre>
 					</section>
 					<section class="fragment-slides">
 						<h1>Test</h1>
-						<pre class="command"><code class="hjls bash">docker run --name appli --link mysql:db ubuntu:14.04 "env"</code></pre>
+						<pre class="command"><code class="hjls bash">docker run --rm --link mysql:db ubuntu:14.04 "env"</code></pre>
 <pre class="fragment dockerfile">
 <code>DB_PORT=tcp://172.17.0.23:3306
 DB_PORT_3306_TCP=tcp://172.17.0.23:3306
