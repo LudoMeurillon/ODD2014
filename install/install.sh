@@ -12,12 +12,12 @@ fi
 export http_proxy=http://proxy:8080
 export https_proxy=http://proxy:8080
 
-pushd ~
+pwd=`pwd`
+
+cd ~
 git clone https://github.com/ludomeurillon/ODD2014.git
-pushd ODD2014
+cd ODD2014
 git checkout -t origin/master
-pushd install
+cd install
 sh install-docker-1.2.0-proxy.sh
-popd
-popd
-popd
+cd $pwd
