@@ -11,6 +11,8 @@ fi
 
 export http_proxy=http://proxy:8080
 export https_proxy=http://proxy:8080
+sudo export http_proxy=http://proxy:8080
+sudo export https_proxy=http://proxy:8080
 
 pwd=`pwd`
 
