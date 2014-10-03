@@ -8,7 +8,7 @@ fi
 echo deb https://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list
 
 # Then import the repository key
-apt-key adv --keyserver-options http-proxy=http://proxy:8080 --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
+apt-key adv --keyserver-options http-proxy=$http_proxy --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
 
 # Install docker
 apt-get update
