@@ -9,10 +9,10 @@ if [ ! -d /usr/local/docker ]; then
   sudo ln -sf /usr/local/docker /var/lib/docker
 fi
 
+http_proxy=http://proxy:8080
+https_proxy=http://proxy:8080
 export http_proxy=http://proxy:8080
 export https_proxy=http://proxy:8080
-sudo export http_proxy=http://proxy:8080
-sudo export https_proxy=http://proxy:8080
 
 pwd=`pwd`
 
