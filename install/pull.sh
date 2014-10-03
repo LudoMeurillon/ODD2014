@@ -10,6 +10,7 @@ cd ~/ODD2014
 #Prepare docker workshop
 sudo docker pull ubuntu:14.04
 sudo docker pull tutum/tomcat:7.0
+sudo docker pull dockerfile/java:oracle-java7
 sudo docker pull mysql:5.6
 sudo docker pull registry:latest
 sudo docker pull google/cadvisor:latest
