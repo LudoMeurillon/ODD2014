@@ -87,7 +87,7 @@
 					<section>
 						<h1>RUN</h1>
 						<div>Lance une commande et commit le résultat dans une nouvelle image</div>
-						<div>exemple : un build maven</div>
+						<div>exemple : une commande maven</div>
 					</section>
 					<section>
 						<h1>COPY &lt;src&gt; &lt;dest&gt;</h1>
@@ -100,8 +100,8 @@
 FROM tutum/tomcat:7.0
 MAINTAINER Developer Day &lt;devday@orange.com&gt;
 
-RUN rm -f /tomcat/webapps/*
-COPY gitbucket.war -o /tomcat/webapps/ROOT.war
+RUN rm -rf /tomcat/webapps/*
+COPY gitbucket.war /tomcat/webapps/ROOT.war
 
 </code></pre>
 					</section>
@@ -131,7 +131,7 @@ COPY gitbucket.war -o /tomcat/webapps/ROOT.war
 					</section>
 					<section>
 						<h1>Run - Image</h1>
-						<pre>devday/git:latest</pre>
+						<pre>devday/git</pre>
 						<div>Base le container sur l'image devday/git dans sa dernière version disponible</div>
 					</section>
 					<section>
@@ -170,7 +170,6 @@ DB_ENV_MYSQL_VERSION=5.6.20
 					</section>
 					<section>
 						<h1>Fichiers</h1>
-						<div>diff</div>
 						<div>containers</div>
 						<div>images</div>
 					</section>
