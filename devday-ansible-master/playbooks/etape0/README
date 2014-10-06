@@ -1,0 +1,5 @@
+Lancer une commande Ansible directement avec la command "ansible"
+
+exemple : faire un ping sur toutes les machines connues dans l'inventaire par defaut /etc/ansible/hosts
+
+ansible -m ping all 

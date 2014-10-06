@@ -1,0 +1,7 @@
+---
+  - name: "reconfigure rsyslogd if needed"
+    template: src=listen.conf dest=/etc/rsyslog.d/listen.conf
+
+  - name: "start rsyslog"
+    service: name=rsyslog state=started
+

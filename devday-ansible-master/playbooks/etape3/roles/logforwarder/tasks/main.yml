@@ -1,0 +1,6 @@
+---
+  - name: "Configure Rsyslog"
+    template: src=forward.conf dest=/etc/rsyslog.d/forward.conf
+
+  - name: "start rsyslog"
+    service: name=rsyslog state=started

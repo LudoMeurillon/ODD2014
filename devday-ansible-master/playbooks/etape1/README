@@ -1,0 +1,24 @@
+Lancer un playbook de base qui permet de récupérer les hostname de chaque machine
+commande à lancer sur chaque machine "hostname"
+pour cela il faut utiliser le concept de playbook.
+
+ansible-playbook -i <inventaire> etape1/site.yml
+
+#site.yml
+name: <nom du playbook>
+hosts: <machines sur lesquelles lancer le playbook>
+tasks: 
+  - <tache>
+  - <tache>
+
+une tache se présente sous la forme :
+
+- name: <description>
+  <module>: <args>
+  register: <nom de la variable qui stoque le resultat pour chaque machine>
+
+Objectif :
+
+Utilisez les modules "command: <command>", "debug: msg=<message>" et les register pour afficher les hostname de toutes les machines de l'inventaire via un playbook.
+
+

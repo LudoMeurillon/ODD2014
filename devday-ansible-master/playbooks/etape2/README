@@ -1,0 +1,6 @@
+Objectif : utiliser les groupes pour ne jouer le playbook d'installation d'un site web que pour les "webservers"
+
+Pour installer le site web on copiera (module "copy") le dossier "site" dans "/var/www/html" des machines concernées puis on redémarrera apache avec le module "service"
+
+
+Validation : on doit pouvoir joindre http://localhost:5001 et http://localhost:5003 avec un super site web en retour

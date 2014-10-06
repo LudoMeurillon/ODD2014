@@ -1,0 +1,2 @@
+#On peut définir des variables par défaut pour le rôle ici 
+#Ces valeurs peuvent être surchargées par les "group_vars" ou toute autre variable injectées par le playbook

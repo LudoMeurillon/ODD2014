@@ -1,0 +1,9 @@
+Objectif : utiliser les roles pour structurer le code ansible
+
+On va définir et utiliser 3 roles : "webserver", "logserver" et "logforwarder" qui peuvent etre affectés ensemble ou non à plusieurs machines
+
+les "website" feront office de frontal web et comme ce sont aussi des "logforwarder", ils enverront leur logs apache vers "logserver"
+
+Le contenu du site web n'est pas présent dans l'exercice, il faut le récuperer de l'étape précédente et le poser dans le bon rôle.
+
+Les rôles sont déjà définis mais ne sont pas cablés dans le playbook.

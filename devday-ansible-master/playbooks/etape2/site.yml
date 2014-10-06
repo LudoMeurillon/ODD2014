@@ -1,0 +1,7 @@
+---
+#A vous de completer ce playbook
+
+#exemple "copy: src=<dossier machine locale>/ dest=<dossier machine distante>"
+#remarque :  pensez au "/"
+
+#exemple "service: name=<service> state=started"

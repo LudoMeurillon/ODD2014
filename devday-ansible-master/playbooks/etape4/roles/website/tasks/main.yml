@@ -1,0 +1,8 @@
+---
+#Tous les sites sont en anglais, ce qui gène vraiment nos utilisateurs en europe
+#Passez les sites europeens en francais
+  - name: "Installation du site"
+    copy: src=site/en/ dest=/var/www/html
+
+  - name: "start apache2"
+    service: name=apache2 state=started
