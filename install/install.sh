@@ -3,9 +3,7 @@
 if [ ! -d /usr/local/docker ]; then
   echo "create /usr/local/docker"
   sudo mkdir /usr/local/docker
-fi
-if [ ! -d /usr/local/docker ]; then
-  echo "link /var/lib/docker to /usr/loca/docker"
+  echo "link /var/lib/docker to /usr/local/docker"
   sudo ln -sf /usr/local/docker /var/lib/docker
 fi
 
